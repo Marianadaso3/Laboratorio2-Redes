@@ -1,5 +1,5 @@
-#Esta clase se encarga de otorgar/enviar el mensaje 
 
+#Función de corrección de errores: Código de Hamming
 def calcular_codigo_hamming(mensaje):
     n = len(mensaje)
     m = 2
@@ -30,7 +30,6 @@ def main():
     trama = input("Ingrese la trama en binario: ")
     codigo_hamming = calcular_codigo_hamming(trama)
     print("Trama con código de Hamming:", codigo_hamming)
-
 
 if __name__ == "__main__":
     main()
