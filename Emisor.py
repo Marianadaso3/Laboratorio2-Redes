@@ -8,13 +8,14 @@ def calcular_codigo_hamming(mensaje):
     
     codigo_hamming = [0] * (n + m)
     j = 0
+    k = 0  # Agrega una variable para rastrear la posición en la cadena mensaje
 
     for i in range(1, n + m + 1):
         if i == 2**j:
             j += 1
         else:
-            codigo_hamming[i - 1] = int(mensaje[j])
-            j += 1
+            codigo_hamming[i - 1] = int(mensaje[k])  # Usa la variable k para acceder a mensaje
+            k += 1
     
     for i in range(m):
         parity = 0
