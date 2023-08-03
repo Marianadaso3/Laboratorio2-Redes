@@ -5,7 +5,7 @@ def verificar_fletcher_checksum(mensaje):
     sum2 = 0
 
     for byte in mensaje:
-        sum1 = (sum1 + byte) % modulo
+        sum1 = (sum1 + int(byte)) % modulo  # Convierte byte a entero antes de sumar
         sum2 = (sum2 + sum1) % modulo
     
     checksum = (sum2 << 8) | sum1
