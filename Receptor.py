@@ -35,16 +35,3 @@ def corregir_codigo_hamming(codigo_hamming):
         codigo_hamming = list(codigo_hamming)
         codigo_hamming[error_bit] = "1" if codigo_hamming[error_bit] == "0" else "0"
         return "".join(codigo_hamming)[:n]
-
-
-def main():
-    trama_con_codigo_hamming = input("Ingrese la trama con código de Hamming: ")
-    if verificar_fletcher_checksum(trama_con_codigo_hamming):
-        trama_corregida = corregir_codigo_hamming(trama_con_codigo_hamming)
-        print("Trama recibida:", trama_corregida)
-    else:
-        print("La trama se descarta por detectar errores.")
-
-
-if __name__ == "__main__":
-    main()

@@ -24,12 +24,3 @@ def calcular_codigo_hamming(mensaje):
         codigo_hamming[2**i - 1] = parity
 
     return "".join(map(str, codigo_hamming))
-
-
-def main():
-    trama = input("Ingrese la trama en binario: ")
-    codigo_hamming = calcular_codigo_hamming(trama)
-    print("Trama con código de Hamming:", codigo_hamming)
-
-if __name__ == "__main__":
-    main()
