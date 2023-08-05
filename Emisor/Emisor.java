@@ -53,7 +53,8 @@ class ComputeHammingCode {
     }
 
     public static void main(String[] args) {
-        String data = "1011001";
+        String data = "110011011110101010101";
+        System.out.println("Data transferred: " + data);
         String hammingCode = computeHammingCode(data);
         System.out.println("Transferred data with Hamming code: " + hammingCode);
     }

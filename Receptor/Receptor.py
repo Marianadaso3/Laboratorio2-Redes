@@ -37,26 +37,19 @@ def detect_error(arr, nr):
 
 
 
-test_message = "10101001110" # original message
-expected_checksum = 0x9018 # checksum calculated by the sender
+
+
+test_message = "11001101111101010100101101" # original message
+expected_checksum = 0xF4F4 # checksum calculated by the sender
 
 print(f"Original Message received: {test_message}")
 calculated_checksum = calculate_fletcher_checksum(test_message)
 print(f"Calculated Checksum: 0x{calculated_checksum:X}")
 print(f"Checksum Matches: {verify_fletcher_checksum(test_message, expected_checksum)}")
 
-modified_message = "Hello, worm!"
+modified_message = "11001001110101010100101101"
+print(f"Modified Message received: {modified_message}")
 print(f"Checksum Matches (Modified Message): {verify_fletcher_checksum(modified_message, expected_checksum)}")
 
 
-
-print("\n\n\n")
-test_message_with_error = "11101001110" # message with error
-r = calculate_redundant_bits(len(test_message))
-print("Error Data is " + test_message_with_error)
-correction = detect_error(test_message_with_error, r)
-if(correction==0):
-    print("There is no error in the received message.")
-else:
-    print("The position of error is ",len(test_message_with_error)-correction+1,"from the left")
 

@@ -48,27 +48,17 @@ class Receptor {
     }
 
     public static void main(String[] args) {
-        String testMessage = "10101001110"; // original message
-        int expectedChecksum = 0x9018; // checksum calculated by the sender
+        String testMessage = "11001101111101010100101101"; // original message
+        int expectedChecksum = 0xF4F4; // checksum calculated by the sender
 
         System.out.println("Original Message received: " + testMessage);
         int calculatedChecksum = calculateFletcherChecksum(testMessage);
         System.out.println("Calculated Checksum: 0x" + Integer.toHexString(calculatedChecksum).toUpperCase());
         System.out.println("Checksum Matches: " + verifyFletcherChecksum(testMessage, expectedChecksum));
 
-        String modifiedMessage = "Hello, worm!";
+        String modifiedMessage = "11001001111101010100101101";
+        System.out.println("Modified Message received: " + modifiedMessage);
         System.out.println("Checksum Matches (Modified Message): " + verifyFletcherChecksum(modifiedMessage, expectedChecksum));
 
-        System.out.println("\n\n\n");
-
-        String testMessageWithError = "11101001110"; // message with error
-        int r = calculateRedundantBits(testMessage.length());
-        System.out.println("Error Data is " + testMessageWithError);
-        int correction = detectError(testMessageWithError, r);
-        if (correction == 0) {
-            System.out.println("There is no error in the received message.");
-        } else {
-            System.out.println("The position of error is " + (testMessageWithError.length() - correction + 1) + " from the left");
-        }
     }
 }

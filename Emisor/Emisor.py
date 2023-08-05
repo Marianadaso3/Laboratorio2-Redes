@@ -37,7 +37,8 @@ def compute_hamming_code(data):
     arr = calculate_parity_bits(arr, r)
     return arr
 
-data = '1011001'
+data = '110011011110101010101'
+print("Data transferred is " + data)
 hamming_code = compute_hamming_code(data)
 print("Transferred data with Hamming code: " + hamming_code)
 
