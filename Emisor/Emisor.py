@@ -35,10 +35,19 @@ def compute_hamming_code(data):
     r = calculate_redundant_bits(len(data))
     arr = add_redundant_bits(data, r)
     arr = calculate_parity_bits(arr, r)
-    return arr
+    return (arr,r)
 
-data = '110011011110101010101'
-print("Data transferred is " + data)
-hamming_code = compute_hamming_code(data)
-print("Transferred data with Hamming code: " + hamming_code)
+
+
+def codificarStringToBinaryAscii(string):
+    binary = ''.join(format(ord(x), 'b') for x in string)
+    return binary
+
+
+# data = codificarStringToBinaryAscii("Hola Mundo")
+# print("Data transferred is " + data)
+# data = '110011011110101010101'
+# print("Data transferred is " + data)
+# hamming_code = compute_hamming_code(data)
+# print("Transferred data with Hamming code: " + hamming_code)
 
