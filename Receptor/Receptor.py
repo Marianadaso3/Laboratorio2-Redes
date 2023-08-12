@@ -1,4 +1,7 @@
 def detectError(arr, nr):
+    print(arr)
+    print(type(arr))
+    print(nr)
     n = len(arr)
     res = 0
  
@@ -17,8 +20,6 @@ def detectError(arr, nr):
 def bin_ascii_to_bytes(binary):
     string = ''.join(chr(int(binary[i*8:i*8+8],2)) for i in range(len(binary)//8))
     return string
-
-
 
 
 

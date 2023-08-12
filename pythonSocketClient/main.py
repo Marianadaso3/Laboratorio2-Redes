@@ -22,21 +22,32 @@ async def receive_messages(websocket):
             data = await websocket.recv()
             data = json.loads(data)
             
+            
+            
             binaryMessage = data["hammingCode"]
             r = data["r"]
             correction = Receptor.detectError(binaryMessage,r)
+            res = ""
             if(correction==0):
                 print("There is no error in the received message.")
+                res= "There is no error in the received message."
             else:
                 print("The position of error is ",len(binaryMessage)-correction,"from the left")
-
+                res= "The position of error is "+str(len(binaryMessage)-correction)+" from the left"
+    
+            # append data to a csv file
+            with open('data.csv', 'a') as f:
+                # set header
+                if os.stat("data.csv").st_size == 0:
+                    f.write("originalMessage,asciiBinary,hammingCode,Error index,result of error,noiseApplied\n")
+                f.write(data["originalMessage"]+","+data["asciiBinary"]+","+data["hammingCode"]+","+str(correction)+","+res+","+str(data["noiseApplied"])+"\n")
     except websockets.exceptions.ConnectionClosed:
         print("WebSocket connection closed.")
 
 
 async def send_messages(websocket):
     cont = 0
-    while cont<100:
+    while cont<10000:
         # solicitar mensaje
         message = await asyncio.get_event_loop().run_in_executor(None, getRandomSentence)
         
@@ -48,13 +59,15 @@ async def send_messages(websocket):
         hammingCode,r = await asyncio.get_event_loop().run_in_executor(None, Emisor.compute_hamming_code, encryptedMessage)
         print("sending message: ", hammingCode)
         data = {
+            "originalMessage": message,
+            "asciiBinary": encryptedMessage,
             "hammingCode": hammingCode,
-            "r": r
+            "r": r,
         }
 
         await websocket.send(json.dumps(data))
         cont+=1
-        time.sleep(2)
+        # time.sleep(2)
         # print(f"Sent message: {message}")
 
 async def main(isEmisor):
