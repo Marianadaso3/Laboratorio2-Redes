@@ -36,9 +36,9 @@ async def receive_messages(websocket):
                 res= "The position of error is "+str(len(binaryMessage)-correction)+" from the left"
     
             # append data to a csv file
-            with open('data.csv', 'a') as f:
+            with open('dataFalse.csv', 'a') as f:
                 # set header
-                if os.stat("data.csv").st_size == 0:
+                if os.stat("dataFalse.csv").st_size == 0:
                     f.write("originalMessage,asciiBinary,hammingCode,Error index,result of error,noiseApplied\n")
                 f.write(data["originalMessage"]+","+data["asciiBinary"]+","+data["hammingCode"]+","+str(correction)+","+res+","+str(data["noiseApplied"])+"\n")
     except websockets.exceptions.ConnectionClosed:
